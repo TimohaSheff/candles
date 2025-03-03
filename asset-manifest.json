@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/candle-making-guide/static/css/main.e6c13ad2.css",
+    "main.js": "/candle-making-guide/static/js/main.7ac5e49f.js",
+    "static/js/453.281f9a4c.chunk.js": "/candle-making-guide/static/js/453.281f9a4c.chunk.js",
+    "static/media/logo.png": "/candle-making-guide/static/media/logo.64b9ef2fc654c31ecaf8.png",
+    "index.html": "/candle-making-guide/index.html",
+    "main.e6c13ad2.css.map": "/candle-making-guide/static/css/main.e6c13ad2.css.map",
+    "main.7ac5e49f.js.map": "/candle-making-guide/static/js/main.7ac5e49f.js.map",
+    "453.281f9a4c.chunk.js.map": "/candle-making-guide/static/js/453.281f9a4c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.7ac5e49f.js"
+  ]
+}
