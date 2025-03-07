@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/candles/static/css/main.e6c13ad2.css",
-    "main.js": "/candles/static/js/main.9aa9552a.js",
+    "main.js": "/candles/static/js/main.4b6e1d63.js",
     "static/js/453.281f9a4c.chunk.js": "/candles/static/js/453.281f9a4c.chunk.js",
     "static/media/podstavkes.jpg": "/candles/static/media/podstavkes.367c1f42a9046db8dc9b.jpg",
     "static/media/glues.jpg": "/candles/static/media/glues.49ed52f71c381b26cd22.jpg",
@@ -17,11 +17,11 @@
     "static/media/vk.svg": "/candles/static/media/vk.6abf0fe7b2411b0d1af6adbb860c6a02.svg",
     "static/media/ozon.svg": "/candles/static/media/ozon.40d8c3e1e274ebd002812efcc135d43c.svg",
     "main.e6c13ad2.css.map": "/candles/static/css/main.e6c13ad2.css.map",
-    "main.9aa9552a.js.map": "/candles/static/js/main.9aa9552a.js.map",
+    "main.4b6e1d63.js.map": "/candles/static/js/main.4b6e1d63.js.map",
     "453.281f9a4c.chunk.js.map": "/candles/static/js/453.281f9a4c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.9aa9552a.js"
+    "static/js/main.4b6e1d63.js"
   ]
 }
