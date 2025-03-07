@@ -1,3 +1,45 @@
+# Гид по созданию свечей
+
+Веб-приложение с руководством по созданию ароматических свечей своими руками. Включает в себя каталог наборов для создания свечей, пошаговые инструкции, советы и рекомендации.
+
+## Функциональность
+
+- Каталог наборов для создания свечей с разными ароматами
+- Пошаговые инструкции по созданию свечей
+- Советы и рекомендации
+- Адаптивный дизайн
+- Поддержка темной и светлой темы
+- Плавные анимации и переходы
+
+## Технологии
+
+- React
+- Material-UI
+- Framer Motion
+- React Router
+
+## Установка и запуск
+
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/TimohaSheff/candles.git
+```
+
+2. Установите зависимости:
+```bash
+cd candles
+npm install
+```
+
+3. Запустите проект:
+```bash
+npm start
+```
+
+## Демо
+
+[Ссылка на демо-версию сайта](https://timohasheff.github.io/candles/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
