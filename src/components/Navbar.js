@@ -1,152 +1,199 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, Container, IconButton, Menu, MenuItem, useTheme, useMediaQuery } from '@mui/material';
+import { 
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  Button, 
+  Box, 
+  useTheme, 
+  useMediaQuery,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Divider
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import MenuIcon from '@mui/icons-material/Menu';
-import Logo from './Logo';
+import logoDark from '../assets/logo-dark.svg';
+import logoLight from '../assets/logo-light.svg';
 
-function Navbar({ darkMode, setDarkMode }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+function Navbar({ toggleTheme, isDarkMode }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
   const menuItems = [
     { text: 'Главная', path: '/' },
     { text: 'Инструкции', path: '/instructions' },
+    { text: 'Советы', path: '/tips' },
     { text: 'Материалы', path: '/materials' },
-    { text: 'Каталог', path: '/contact' },
+    { text: 'Каталог', path: '/catalog' }
   ];
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2, color: isDarkMode ? '#DEB887' : '#8B4513' }}>
+        Меню
+      </Typography>
+      <Divider sx={{ mb: 2 }} />
+      <List>
+        {menuItems.map((item) => (
+          <ListItem 
+            key={item.text} 
+            component={RouterLink} 
+            to={item.path}
+            sx={{
+              color: isDarkMode ? '#DEB887' : '#8B4513',
+              '&:hover': {
+                backgroundColor: isDarkMode 
+                  ? 'rgba(222, 184, 135, 0.1)' 
+                  : 'rgba(139, 69, 19, 0.1)'
+              }
+            }}
+          >
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <AppBar 
       position="fixed" 
       sx={{ 
-        background: darkMode 
-          ? 'rgba(18, 18, 18, 0.8)'
+        background: isDarkMode 
+          ? 'rgba(18, 18, 18, 0.8)' 
           : 'rgba(255, 255, 255, 0.8)',
         backdropFilter: 'blur(10px)',
-        borderBottom: `1px solid ${darkMode 
-          ? 'rgba(222, 184, 135, 0.1)'
+        borderBottom: `1px solid ${isDarkMode 
+          ? 'rgba(222, 184, 135, 0.1)' 
           : 'rgba(139, 69, 19, 0.1)'}`,
         boxShadow: 'none'
       }}
     >
-      <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Logo color={darkMode ? '#E6D5C3' : '#A0522D'} />
-            <Typography
-              variant="h6"
-              component={RouterLink}
-              to="/"
+      <Toolbar>
+        <Box 
+          component={RouterLink} 
+          to="/" 
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            textDecoration: 'none',
+            mr: 2
+          }}
+        >
+          <img 
+            src={isDarkMode ? logoDark : logoLight} 
+            alt="Logo" 
+            style={{ 
+              width: '56px', 
+              height: '56px',
+              marginRight: '8px'
+            }} 
+          />
+          <Typography 
+            variant="h6" 
+            component="div" 
+            sx={{ 
+              color: isDarkMode ? '#FFF3CD' : '#9D4B01',
+              fontWeight: 700,
+              display: 'block',
+              fontFamily: '"Kaushan Script", cursive',
+              fontSize: { xs: '1.2rem', sm: '1.8rem', md: '2.2rem' }
+            }}
+          >
+            CreateIT
+          </Typography>
+        </Box>
+
+        <Box sx={{ flexGrow: 1 }} />
+
+        {isMobile ? (
+          <>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ color: isDarkMode ? '#DEB887' : '#8B4513' }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              variant="temporary"
+              anchor="right"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true,
+              }}
               sx={{
-                textDecoration: 'none',
-                color: darkMode ? '#E6D5C3' : '#A0522D',
-                fontFamily: '"Kaushan Script", cursive',
-                fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' }
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { 
+                  boxSizing: 'border-box', 
+                  width: 240,
+                  background: isDarkMode 
+                    ? 'rgba(18, 18, 18, 0.95)' 
+                    : 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(10px)',
+                  borderLeft: `1px solid ${isDarkMode 
+                    ? 'rgba(222, 184, 135, 0.1)' 
+                    : 'rgba(139, 69, 19, 0.1)'}`
+                },
               }}
             >
-              CreateIT
-            </Typography>
-          </Box>
-          
-          <Box sx={{ flexGrow: 1 }} />
-          
-          {isMobile ? (
-            <>
-              <IconButton
-                onClick={handleMenu}
+              {drawer}
+            </Drawer>
+          </>
+        ) : (
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            {menuItems.map((item) => (
+              <Button
+                key={item.text}
+                component={RouterLink}
+                to={item.path}
                 sx={{
-                  color: darkMode ? '#DEB887' : '#8B4513',
-                  mr: 1
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-                PaperProps={{
-                  sx: {
-                    background: darkMode 
-                      ? 'rgba(30, 30, 30, 0.95)'
-                      : 'rgba(255, 255, 255, 0.95)',
-                    backdropFilter: 'blur(10px)',
-                    border: `1px solid ${darkMode 
-                      ? 'rgba(222, 184, 135, 0.1)'
-                      : 'rgba(139, 69, 19, 0.1)'}`,
+                  color: isDarkMode ? '#DEB887' : '#8B4513',
+                  '&:hover': {
+                    backgroundColor: isDarkMode 
+                      ? 'rgba(222, 184, 135, 0.1)' 
+                      : 'rgba(139, 69, 19, 0.1)'
                   }
                 }}
               >
-                {menuItems.map((item) => (
-                  <MenuItem
-                    key={item.text}
-                    component={RouterLink}
-                    to={item.path}
-                    onClick={handleClose}
-                    sx={{
-                      color: darkMode ? '#DEB887' : '#8B4513',
-                      '&:hover': {
-                        backgroundColor: darkMode 
-                          ? 'rgba(222, 184, 135, 0.1)'
-                          : 'rgba(139, 69, 19, 0.1)',
-                      }
-                    }}
-                  >
-                    {item.text}
-                  </MenuItem>
-                ))}
-              </Menu>
-            </>
-          ) : (
-            <Box sx={{ display: 'flex', gap: 2, mr: 2 }}>
-              {menuItems.map((item) => (
-                <Button
-                  key={item.text}
-                  component={RouterLink}
-                  to={item.path}
-                  color="inherit"
-                  sx={{
-                    color: darkMode ? '#DEB887' : '#8B4513',
-                    '&:hover': {
-                      color: darkMode ? '#E6D5C3' : '#A0522D',
-                      backgroundColor: darkMode 
-                        ? 'rgba(222, 184, 135, 0.1)'
-                        : 'rgba(139, 69, 19, 0.1)',
-                    }
-                  }}
-                >
-                  {item.text}
-                </Button>
-              ))}
-            </Box>
-          )}
-          
-          <IconButton 
-            onClick={() => setDarkMode(!darkMode)}
-            sx={{
-              color: darkMode ? '#DEB887' : '#8B4513',
-              '&:hover': {
-                backgroundColor: darkMode 
-                  ? 'rgba(222, 184, 135, 0.1)'
-                  : 'rgba(139, 69, 19, 0.1)',
-              }
-            }}
-          >
-            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
-        </Toolbar>
-      </Container>
+                {item.text}
+              </Button>
+            ))}
+          </Box>
+        )}
+
+        <Button 
+          color="inherit" 
+          onClick={toggleTheme}
+          sx={{ 
+            color: isDarkMode ? '#DEB887' : '#8B4513',
+            '&:hover': {
+              color: isDarkMode ? '#E6D5C3' : '#A0522D'
+            }
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+            <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
+              {isDarkMode ? 'Тёмная тема' : 'Светлая тема'}
+            </Typography>
+          </Box>
+        </Button>
+      </Toolbar>
     </AppBar>
   );
 }

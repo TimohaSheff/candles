@@ -1,113 +1,269 @@
-import React from 'react';
-import { Container, Typography, Box, Button, Paper, useTheme, useMediaQuery } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { 
+  Box, 
+  Container, 
+  Typography, 
+  Button,
+  useTheme,
+  useMediaQuery,
+  IconButton,
+  CircularProgress,
+  Tooltip
+} from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Advantages from '../components/Advantages';
+import AnimatedIcon from '../components/AnimatedIcon';
 
-function Home() {
-  const navigate = useNavigate();
+function Home({ isDarkMode }) {
   const theme = useTheme();
-  const isDarkMode = theme.palette.mode === 'dark';
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const slides = [
+    {
+      title: "Создавайте уникальные свечи своими руками",
+      subtitle: "Откройте для себя искусство изготовления свечей",
+      buttonText: "Начать обучение",
+      buttonLink: "/instructions",
+      buttonStyle: {
+        backgroundColor: '#DEB887',
+        color: '#000',
+        '&:hover': {
+          backgroundColor: '#E6D5C3'
+        }
+      }
+    },
+    {
+      title: "Готовы начать создавать свечи?",
+      subtitle: "Присоединяйтесь к нашему сообществу и создавайте уникальные свечи своими руками",
+      buttonText: "Перейти в каталог",
+      buttonLink: "/catalog",
+      buttonStyle: {
+        backgroundColor: '#DEB887',
+        color: '#000',
+        '&:hover': {
+          backgroundColor: '#E6D5C3'
+        }
+      }
+    }
+  ];
+
+  useEffect(() => {
+    // Проверяем загрузку шрифтов
+    document.fonts.ready.then(() => {
+      setIsLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev === 1 ? 0 : 1));
+  };
 
   return (
-    <Box sx={{ 
-      minHeight: 'calc(100vh - 64px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: isDarkMode 
-        ? 'linear-gradient(135deg, #121212 0%, #1E1E1E 100%)'
-        : 'linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%)',
-      py: { xs: 4, sm: 6 }
-    }}>
-      <Container maxWidth="md">
-        <Paper 
-          elevation={0}
+    <Box sx={{ pt: 8 }}>
+      {isLoading ? (
+        <Box 
           sx={{ 
-            p: { xs: 3, sm: 6 },
-            background: isDarkMode 
-              ? 'rgba(30, 30, 30, 0.8)'
-              : 'rgba(255, 255, 255, 0.8)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: 4,
-            border: `1px solid ${isDarkMode 
-              ? 'rgba(222, 184, 135, 0.1)'
-              : 'rgba(139, 69, 19, 0.1)'}`,
-            maxWidth: '800px',
-            margin: '0 auto'
+            height: { xs: '60vh', sm: '70vh', md: '80vh' },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: isDarkMode ? '#000000' : '#F5F5F5'
           }}
         >
-          <Typography 
-            variant="h2" 
-            component="h1" 
-            gutterBottom
-            sx={{
-              fontWeight: 700,
-              color: isDarkMode ? '#DEB887' : '#8B4513',
-              textAlign: 'center',
-              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
-            }}
-          >
-            Добро пожаловать в мир ароматических свечей
-          </Typography>
-          <Typography 
-            variant="h5" 
-            component="h2" 
-            gutterBottom 
-            color="text.secondary"
-            sx={{ 
-              textAlign: 'center', 
-              mb: 6,
-              fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' }
-            }}
-          >
-            Научитесь создавать прекрасные свечи своими руками
-          </Typography>
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            gap: { xs: 2, sm: 3 },
-            flexWrap: 'wrap'
-          }}>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => navigate('/instructions')}
+          <CircularProgress color={isDarkMode ? 'primary' : 'inherit'} />
+        </Box>
+      ) : (
+        <Box 
+          sx={{ 
+            backgroundColor: isDarkMode ? '#000000' : '#F5F5F5',
+            height: { xs: '60vh', sm: '70vh', md: '80vh' },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            color: isDarkMode ? 'white' : '#8B4513',
+            position: 'relative',
+            overflow: 'hidden',
+            boxShadow: isDarkMode ? 'none' : 'inset 0 0 50px rgba(0,0,0,0.1)',
+            transition: 'all 0.3s ease',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: isDarkMode 
+                ? 'linear-gradient(45deg, rgba(222,184,135,0.1) 0%, rgba(0,0,0,0) 100%)'
+                : 'linear-gradient(45deg, rgba(139,69,19,0.1) 0%, rgba(255,255,255,0) 100%)',
+              opacity: 0.8,
+              transition: 'opacity 0.3s ease'
+            },
+            '&:hover::before': {
+              opacity: 1
+            }
+          }}
+        >
+          <Tooltip title="Предыдущий слайд" arrow>
+            <IconButton
+              onClick={handlePrevSlide}
               sx={{
-                minWidth: { xs: '100%', sm: 200 },
-                background: isDarkMode
-                  ? 'linear-gradient(45deg, #DEB887 30%, #E6D5C3 90%)'
-                  : 'linear-gradient(45deg, #8B4513 30%, #A0522D 90%)',
-                color: isDarkMode ? '#121212' : '#FFFFFF',
+                position: 'absolute',
+                left: { xs: 8, sm: 16 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: isDarkMode ? 'white' : '#8B4513',
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(139, 69, 19, 0.1)',
+                backdropFilter: 'blur(4px)',
                 '&:hover': {
-                  background: isDarkMode
-                    ? 'linear-gradient(45deg, #E6D5C3 30%, #DEB887 90%)'
-                    : 'linear-gradient(45deg, #A0522D 30%, #8B4513 90%)',
-                },
+                  backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(139, 69, 19, 0.2)'
+                }
               }}
             >
-              Начать обучение
-            </Button>
-            <Button
-              variant="outlined"
-              size="large"
-              onClick={() => navigate('/materials')}
+              <AnimatedIcon icon={ArrowBackIosNewIcon} />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Следующий слайд" arrow>
+            <IconButton
+              onClick={handleNextSlide}
               sx={{
-                minWidth: { xs: '100%', sm: 200 },
-                borderColor: isDarkMode ? '#DEB887' : '#8B4513',
-                color: isDarkMode ? '#DEB887' : '#8B4513',
+                position: 'absolute',
+                right: { xs: 8, sm: 16 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: isDarkMode ? 'white' : '#8B4513',
+                backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(139, 69, 19, 0.1)',
+                backdropFilter: 'blur(4px)',
                 '&:hover': {
-                  borderColor: isDarkMode ? '#E6D5C3' : '#A0522D',
-                  backgroundColor: isDarkMode 
-                    ? 'rgba(222, 184, 135, 0.1)'
-                    : 'rgba(139, 69, 19, 0.1)',
-                },
+                  backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(139, 69, 19, 0.2)'
+                }
               }}
             >
-              Необходимые материалы
-            </Button>
-          </Box>
-        </Paper>
-      </Container>
+              <AnimatedIcon icon={ArrowForwardIosIcon} />
+            </IconButton>
+          </Tooltip>
+
+          <Container maxWidth="md">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                transition={{ 
+                  duration: 0.7,
+                  ease: "easeInOut"
+                }}
+              >
+                <Typography 
+                  variant="h1" 
+                  sx={{ 
+                    fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
+                    fontWeight: 700,
+                    mb: 2,
+                    color: isDarkMode ? 'white' : '#8B4513',
+                    textShadow: isDarkMode 
+                      ? '2px 2px 4px rgba(255, 255, 255, 0.25)'
+                      : '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                  }}
+                >
+                  {slides[currentSlide].title}
+                </Typography>
+                <Typography 
+                  variant="h5" 
+                  sx={{ 
+                    fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' },
+                    mb: 4,
+                    color: isDarkMode ? 'white' : '#8B4513',
+                    textShadow: isDarkMode 
+                      ? '1px 1px 2px rgba(255, 255, 255, 0.25)'
+                      : '1px 1px 2px rgba(0, 0, 0, 0.5)'
+                  }}
+                >
+                  {slides[currentSlide].subtitle}
+                </Typography>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    component={RouterLink}
+                    to={slides[currentSlide].buttonLink}
+                    variant="contained"
+                    size="large"
+                    sx={{
+                      ...slides[currentSlide].buttonStyle,
+                      fontSize: { xs: '0.9rem', sm: '1rem' },
+                      padding: { xs: '8px 16px', sm: '10px 20px' },
+                      transition: 'all 0.3s ease',
+                      backdropFilter: 'blur(4px)',
+                      '&:hover': {
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
+                      }
+                    }}
+                  >
+                    {slides[currentSlide].buttonText}
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+
+            <Box 
+              component={motion.div}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              sx={{ 
+                position: 'absolute', 
+                bottom: 16, 
+                left: '50%', 
+                transform: 'translateX(-50%)',
+                display: 'flex',
+                gap: 1
+              }}
+            >
+              {[0, 1].map((index) => (
+                <Box
+                  key={index}
+                  component={motion.div}
+                  whileHover={{ scale: 1.2 }}
+                  onClick={() => setCurrentSlide(index)}
+                  sx={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: '50%',
+                    backgroundColor: currentSlide === index 
+                      ? (isDarkMode ? 'white' : '#8B4513')
+                      : (isDarkMode ? 'rgba(255, 255, 255, 0.5)' : 'rgba(139, 69, 19, 0.5)'),
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                  }}
+                />
+              ))}
+            </Box>
+          </Container>
+        </Box>
+      )}
+      <Advantages />
     </Box>
   );
 }

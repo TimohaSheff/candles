@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import Home from './pages/Home';
 import Instructions from './pages/Instructions';
 import Materials from './pages/Materials';
-import Contact from './pages/Contact';
+import Catalog from './pages/Catalog';
+import Tips from './pages/Tips';
+import PageTransition from './components/PageTransition';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -75,13 +81,28 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/instructions" element={<Instructions />} />
-          <Route path="/materials" element={<Materials />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <ScrollToTop />
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          minHeight: '100vh'
+        }}>
+          <Navbar isDarkMode={darkMode} toggleTheme={() => setDarkMode(!darkMode)} />
+          <Box component="main" sx={{ flexGrow: 1 }}>
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<Home isDarkMode={darkMode} />} />
+                <Route path="/instructions" element={<Instructions isDarkMode={darkMode} />} />
+                <Route path="/materials" element={<Materials isDarkMode={darkMode} />} />
+                <Route path="/catalog" element={<Catalog isDarkMode={darkMode} />} />
+                <Route path="/tips" element={<Tips isDarkMode={darkMode} />} />
+                <Route path="*" element={<Home isDarkMode={darkMode} />} />
+              </Routes>
+            </PageTransition>
+          </Box>
+          <Footer />
+          <ScrollToTopButton />
+        </Box>
       </Router>
     </ThemeProvider>
   );
