@@ -1,16 +1,27 @@
 {
   "files": {
-    "main.css": "/candle-making-guide/static/css/main.e6c13ad2.css",
-    "main.js": "/candle-making-guide/static/js/main.7ac5e49f.js",
-    "static/js/453.281f9a4c.chunk.js": "/candle-making-guide/static/js/453.281f9a4c.chunk.js",
-    "static/media/logo.png": "/candle-making-guide/static/media/logo.64b9ef2fc654c31ecaf8.png",
-    "index.html": "/candle-making-guide/index.html",
-    "main.e6c13ad2.css.map": "/candle-making-guide/static/css/main.e6c13ad2.css.map",
-    "main.7ac5e49f.js.map": "/candle-making-guide/static/js/main.7ac5e49f.js.map",
-    "453.281f9a4c.chunk.js.map": "/candle-making-guide/static/js/453.281f9a4c.chunk.js.map"
+    "main.css": "/candles/static/css/main.e6c13ad2.css",
+    "main.js": "/candles/static/js/main.8c2ced24.js",
+    "static/js/453.281f9a4c.chunk.js": "/candles/static/js/453.281f9a4c.chunk.js",
+    "static/media/podstavkes.jpg": "/candles/static/media/podstavkes.367c1f42a9046db8dc9b.jpg",
+    "static/media/glues.jpg": "/candles/static/media/glues.49ed52f71c381b26cd22.jpg",
+    "static/media/shpatels.jpg": "/candles/static/media/shpatels.9a1513dd645794cfbf1b.jpg",
+    "static/media/instruction.mp4": "/candles/static/media/instruction.f41c9c5090684356459b.mp4",
+    "static/media/fitils.jpg": "/candles/static/media/fitils.c8ab6fad3a306cf6b1fc.jpg",
+    "static/media/aromamax.jpg": "/candles/static/media/aromamax.dfd70c83ee4475512a9b.jpg",
+    "static/media/aroma.jpg": "/candles/static/media/aroma.0b9894b3183cb7226c02.jpg",
+    "static/media/logo-dark.svg": "/candles/static/media/logo-dark.070a846db1bd31759e10ffaddff1af7c.svg",
+    "static/media/logo-light.svg": "/candles/static/media/logo-light.d57fc8947fbbbe2f88967aa48dd65cbf.svg",
+    "index.html": "/candles/index.html",
+    "static/media/tiktok.svg": "/candles/static/media/tiktok.8f5629788b51a014b9f0c735dfc04c93.svg",
+    "static/media/vk.svg": "/candles/static/media/vk.6abf0fe7b2411b0d1af6adbb860c6a02.svg",
+    "static/media/ozon.svg": "/candles/static/media/ozon.40d8c3e1e274ebd002812efcc135d43c.svg",
+    "main.e6c13ad2.css.map": "/candles/static/css/main.e6c13ad2.css.map",
+    "main.8c2ced24.js.map": "/candles/static/js/main.8c2ced24.js.map",
+    "453.281f9a4c.chunk.js.map": "/candles/static/js/453.281f9a4c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.7ac5e49f.js"
+    "static/js/main.8c2ced24.js"
   ]
 }
