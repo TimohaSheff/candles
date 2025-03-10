@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/candles/static/css/main.e6c13ad2.css",
-    "main.js": "/candles/static/js/main.fa1580c1.js",
+    "main.js": "/candles/static/js/main.328b3a73.js",
     "static/js/453.1ec10c50.chunk.js": "/candles/static/js/453.1ec10c50.chunk.js",
     "static/media/muskus2.jpg": "/candles/static/media/muskus2.ba605ab3de8f3620e697.jpg",
     "static/media/sinnabon2.jpg": "/candles/static/media/sinnabon2.6557397f59aab8fcab9d.jpg",
@@ -47,11 +47,11 @@
     "static/media/tiktok.svg": "/candles/static/media/tiktok.8f5629788b51a014b9f0c735dfc04c93.svg",
     "static/media/vk.svg": "/candles/static/media/vk.6abf0fe7b2411b0d1af6adbb860c6a02.svg",
     "main.e6c13ad2.css.map": "/candles/static/css/main.e6c13ad2.css.map",
-    "main.fa1580c1.js.map": "/candles/static/js/main.fa1580c1.js.map",
+    "main.328b3a73.js.map": "/candles/static/js/main.328b3a73.js.map",
     "453.1ec10c50.chunk.js.map": "/candles/static/js/453.1ec10c50.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.fa1580c1.js"
+    "static/js/main.328b3a73.js"
   ]
 }
